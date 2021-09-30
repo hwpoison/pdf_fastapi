@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title> {{ details.title }} </title>
+  </head>
+  <body>
+    <div class="invoice-box">
+      <table cellpadding="0" cellspacing="0">
+        <tr class="top">
+          <td colspan="2">
+            <table>
+              <tr>
+                <td class="title">
+                  <img src="data:image/png;base64,{{ to_base64(static_dir, 'images/logo.png') }}" style="width: 85%; max-width: 300px" />
+                </td>
+
+                <td>
+                  <h3>{{ details.title }}</h2>
+                  Fake Street 20393<br />
+                  Over the rainbow
+                </td>
+              </tr>
+            </table>
+            <hr>
+          </td>
+        </tr>
+        <tr class="information">
+          <td colspan="2">
+            <table>
+              <tr>
+
+                <td>
+                  Ticket N°: {{ details.ticket_num }}<br />
+                  Emited: January 1, 2015<br />
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        {% for name, price in items.items() %}
+          <tr class="heading">
+            <td> {{ name }} </td>
+
+            <td>Item </td>
+          </tr>
+
+          <tr class="details">
+            <td>Check</td>
+
+            <td> ${{ price }} </td>
+          </tr>
+        {% endfor %}
+        <tr class="total">
+          <td></td>
+          <td>Total: ${{ items.values()|sum }}</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
+<style> {{ read_file(static_dir, 'style.css') }}</style>
